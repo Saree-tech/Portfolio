@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sareen Fatima | Portfolio</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+    <style>
+        /* Global */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f2f5; /* Light grey for a clean base */
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        h2 {
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #2c3e50; /* Darker blue-grey for headings */
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #2c3e50; /* Professional dark blue-grey */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+        .navbar .nav-link {
+            color: #ecf0f1 !important; /* Light grey for good contrast */
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .navbar .nav-link:hover {
+            color: #3498db !important; /* Muted blue for hover */
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700 !important;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #3498db, #2980b9); /* Blues for a calm, professional feel */
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: all 1s ease;
+        }
+        .hero.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero h1 {
+            font-size: 3.5rem; /* Slightly larger for impact */
+            font-weight: bold;
+        }
+        .hero p {
+            font-size: 1.4rem; /* Slightly larger */
+            margin-top: 15px;
+        }
+        .hero a.btn {
+            margin-top: 30px; /* More space */
+            border-radius: 50px; /* More rounded */
+            padding: 12px 35px; /* More padding */
+            font-size: 1.1rem;
+            border: 2px solid white;
+        }
+        .btn-outline-light:hover {
+            background: white;
+            color: #3498db; /* Blue on hover */
+            border-color: white;
+        }
+
+        /* About Section */
+        #about {
+            background: #ecf0f1; /* Lighter grey for this section */
+            padding: 80px 20px;
+            color: #333;
+            opacity: 0; /* Start invisible for animation */
+            transform: translateY(30px); /* Start slightly below for fadeInUp */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition */
+        }
+        #about.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #about h2 {
+            color: #2c3e50; /* Match main heading color */
+        }
+        #about p {
+            color: #555; /* Slightly softer text color */
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem; /* Slightly larger */
+            line-height: 1.8;
+            margin-bottom: 20px; /* Space between paragraphs */
+        }
+
+        /* Skills Section */
+        #skills {
+            background: #2c3e50; /* Dark blue-grey for a strong contrast */
+            padding: 80px 20px;
+        }
+        #skills h2 {
+            color: #ecf0f1; /* Light text for dark background */
+        }
+        .skill-card {
+            background: rgba(255, 255, 255, 0.15); /* Slightly less transparent for better visibility */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Slightly more prominent border */
+            backdrop-filter: blur(5px);
+            color: #fff; /* Keep text white */
+            border-radius: 12px;
+            width: 100%;
+            height: 190px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow for definition */
+            text-align: center;
+            padding: 25px;
+            transition: 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Start invisible and off-screen, ready for animation */
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        .skill-card h6 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #ecf0f1; /* Keep heading light */
+        }
+        .skill-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #3498db; /* Keep icon color */
+        }
+        .skill-card p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: #f0f0f0; /* Make paragraph text slightly brighter for contrast */
+        }
+
+        /* Apply the animations when the classes are added */
+        .skill-card.visible-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        .skill-card.visible-right {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+
+        /* Projects Section */
+        #projects {
+            background: #f0f2f5; /* Light grey, consistent with body */
+            padding: 80px 20px;
+            color: #333;
+        }
+        #projects h2 {
+            color: #2c3e50;
+        }
+        .project-row {
+            margin-bottom: 40px;
+            /* Start invisible and off-screen, ready for animation */
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        .project-card {
+            background: #ffffff; /* Pure white for project cards */
+            border-radius: 12px;
+            padding: 35px;
+            height: auto;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        .project-card h5 {
+            margin-bottom: 20px;
+            color: #2c3e50; /* Ensure heading is dark and visible */
+            font-size: 1.6rem;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .project-tech span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            color: #333; /* Make text darker for contrast against light background */
+            background-color: #f8f9fa;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .project-tech .fab, .project-tech .fas {
+            font-size: 1.2rem;
+            color: #3498db; /* Keep icon color */
+        }
+        #projects .container .row p { /* Styling for project descriptions */
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555; /* Ensure project description text is visible */
+            background-color: transparent; /* REMOVED BACKGROUND */
+            border-radius: 0; /* REMOVED BORDER RADIUS */
+            box-shadow: none; /* REMOVED SHADOW */
+            padding: 0; /* REMOVED PADDING */
+        }
+
+        /* Apply the animations when the classes are added */
+        .project-row.visible-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        .project-row.visible-right {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #3498db, #2980b9); /* Consistent with hero, professional blue */
+            padding: 80px 20px;
+            color: #ecf0f1;
+        }
+        #contact h2 {
+            color: #ecf0f1; /* Light text */
+        }
+        #contact form {
+            background: #ffffff; /* White form background */
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 650px;
+            margin: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .form-control {
+            border-radius: 8px; /* Slightly rounded inputs */
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        #contact .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        #contact .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+        #contact .text-center.mt-4 p {
+            color: #ecf0f1;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        #contact .btn-outline-dark {
+            border-color: #ecf0f1;
+            color: #ecf0f1;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        #contact .btn-outline-dark:hover {
+            background-color: #ecf0f1;
+            color: #3498db;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.95rem;
+        }
+
+        /* Keyframe Definitions */
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="#">Sareen Fatima</a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <h1>👋 Hello, I’m Sareen Fatima</h1>
+        <p>Web Developer • AI Enthusiast • Python & C++ Programmer</p>
+        <a href="https://drive.google.com/file/d/1hV_Mzes2pVowSpYJyEpkX_necYKA1W-9/view?usp=sharing" class="btn btn-outline-light" target="_blank">Download Resume</a>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>
+            Greetings! I'm Sareen Fatima, a passionate and driven Computer Science student who thrives on bringing ideas to life through code. My journey began with a curiosity for how things work, leading me to delve deep into programming and problem-solving. 💡
+        </p>
+        <p>
+            I specialize in crafting robust backend systems with Python (Flask) 🐍, building dynamic and responsive user interfaces with HTML, CSS, and JavaScript 🌐, and tackling complex algorithms with C++ 💻. I'm adept at database management, working seamlessly with both relational (MySQL) 🗄️ and NoSQL (MongoDB) 🌿 systems to ensure efficient data handling.
+        </p>
+        <p>
+            Beyond core development, I'm fascinated by the potential of Artificial Intelligence 🤖 and continuously explore its applications. My projects, such as a real-time Chat Room using Sockets and Threading 💬 and the comprehensive BuySell Hub, demonstrate my ability to tackle diverse challenges and deliver functional, well-structured solutions. I believe in continuous learning and leveraging tools like GitHub 🐙 for collaborative and efficient development.
+        </p>
+        <p>
+            I'm committed to writing clean, efficient code and utilizing technology to create a positive impact. When I'm not coding, you'll find me researching new tech trends or finding innovative ways to apply my skills. I'm eager to contribute to impactful projects and grow as a versatile developer. ✨
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fab fa-python fa-2x mb-2"></i><h6>Python</h6><p>Core + Projects</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fas fa-code fa-2x mb-2"></i><h6>C++</h6><p>DSA, OOP</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fab fa-html5 fa-2x mb-2"></i><h6>HTML</h6><p>Semantic & Forms</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fab fa-css3-alt fa-2x mb-2"></i><h6>CSS</h6><p>Responsive Design</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fab fa-js-square fa-2x mb-2"></i><h6>JavaScript</h6><p>DOM & Logic</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fab fa-bootstrap fa-2x mb-2"></i><h6>Bootstrap</h6><p>UI Components</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fas fa-flask fa-2x mb-2"></i><h6>Flask</h6><p>Backend API</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fas fa-database fa-2x mb-2"></i><h6>MySQL</h6><p>Relational DB</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fas fa-leaf fa-2x mb-2"></i><h6>MongoDB</h6><p>NoSQL DB</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fab fa-react fa-2x mb-2"></i><h6>React.js</h6><p>UI, Components</p></div></div>
+                <div class="col-md-6 col-6"><div class="skill-card"><i class="fab fa-github fa-2x mb-2"></i><h6>GitHub</h6><p>Version Control</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="container">
+            <div class="row align-items-center g-4 project-row">
+                <div class="col-md-6">
+                    <div class="project-card">
+                        <h5>Chat Room GUI</h5>
+                        <div class="project-tech">
+                            <span><i class="fab fa-python"></i> Python</span>
+                            <span><i class="fas fa-desktop"></i> Tkinter</span>
+                            <span><i class="fas fa-network-wired"></i> Sockets</span>
+                            <span><i class="fas fa-sync-alt"></i> Threading</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p>A real-time Python chat application with a Tkinter GUI, utilizing socket programming for network communication and threading for concurrent message handling, allowing users to communicate over LAN.</p>
+                </div>
+            </div>
+
+            <div class="row align-items-center g-4 mt-5 project-row">
+                <div class="col-md-6 order-md-2">
+                    <div class="project-card">
+                        <h5>BuySell Hub</h5>
+                        <div class="project-tech">
+                            <span><i class="fab fa-python"></i> Python</span>
+                            <span><i class="fas fa-flask"></i> Flask</span>
+                            <span><i class="fas fa-leaf"></i> MongoDB</span>
+                            <span><i class="fab fa-html5"></i> HTML</span>
+                            <span><i class="fab fa-css3-alt"></i> CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <p>A Flask-based doctor-patient system built with Python (Flask Framework) for the backend HTML and CSS for the frontend, utilizing MongoDB for multi-collection relationship management.</p>
+                </div>
+            </div>
+
+            <div class="row align-items-center g-4 mt-5 project-row">
+                <div class="col-md-6">
+                    <div class="project-card">
+                        <h5>Library Management</h5>
+                        <div class="project-tech">
+                            <span><i class="fas fa-database"></i> MySQL</span>
+                            <span><i class="fas fa-terminal"></i> CLI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p>A MySQL login system with roles, triggers, and auto-updated book tracking. Clean UI and CLI logic.</p>
+                </div>
+            </div>
+
+            <div class="row align-items-center g-4 mt-5 project-row">
+                <div class="col-md-6 order-md-2">
+                    <div class="project-card">
+                        <h5>Railway Reservation System</h5>
+                        <div class="project-tech">
+                            <span><i class="fas fa-code"></i> C++</span>
+                            <span><i class="fas fa-terminal"></i> CLI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <p>A command-line interface application for managing railway ticket reservations, including booking, cancellation, and seat availability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form action="https://formspree.io/f/xrblbzzz" method="POST">
+            <div class="mb-3"><input type="text" name="name" class="form-control" placeholder="Your Name" required /></div>
+            <div class="mb-3"><input type="email" name="email" class="form-control" placeholder="Your Email" required /></div>
+            <div class="mb-3"><textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea></div>
+            <div class="text-center"><button type="submit" class="btn btn-primary px-4">Send</button></div>
+        </form>
+        <div class="text-center mt-4">
+            <p>Email: sfatima4508@gmail.com</p>
+            <a href="https://www.linkedin.com/in/sareen-fatima-960a96325" class="btn btn-outline-dark me-2"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Saree-tech" class="btn btn-outline-dark"><i class="fab fa-github"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sareen Fatima. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // HERO animation
+        const hero = document.getElementById("hero");
+        const heroObs = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                hero.classList.add("visible");
+                heroObs.unobserve(hero); // Stop observing once visible
+            }
+        }, { threshold: 0.5 });
+        heroObs.observe(hero);
+
+        // ABOUT ME animation
+        const aboutSection = document.getElementById("about");
+        const aboutObs = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                aboutSection.classList.add("visible");
+                aboutObs.unobserve(aboutSection); // Stop observing once visible
+            }
+        }, { threshold: 0.4 }); // Trigger when 40% of the section is visible
+        aboutObs.observe(aboutSection);
+
+
+        // Function to handle animating elements with IntersectionObserver
+        function animateOnScroll(selector, threshold = 0.3) {
+            const elements = document.querySelectorAll(selector);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        // Apply animation if not already animated
+                        if (!entry.target.classList.contains('visible-left') && !entry.target.classList.contains('visible-right')) {
+                            // Alternate animation direction based on index
+                            entry.target.classList.add(i % 2 === 0 ? 'visible-left' : 'visible-right');
+                        }
+                    }
+                });
+            }, { threshold: threshold });
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // Initialize animations for skills and projects
+        animateOnScroll('.skill-card');
+        animateOnScroll('.project-row');
+    </script>
+</body>
+</html>
